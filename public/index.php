@@ -6,6 +6,8 @@
  * vers la classe <Nom>Controller et sa méthode <methode>.
  */
 
+session_start();
+
 spl_autoload_register(function (string $class): void {
     $paths = [
         __DIR__ . '/../app/config/' . $class . '.php',

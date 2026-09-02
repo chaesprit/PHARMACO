@@ -2,9 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <?php require VUES_DIR . 'partials/polices.php'; ?>
     <title>Inscription — Système de Gestion de Pharmacie</title>
 </head>
 <body>
+    <?php require VUES_DIR . 'partials/navigation.php'; ?>
     <h1>Inscription</h1>
 
     <?php if ($succes): ?>

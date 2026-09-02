@@ -1,0 +1,525 @@
+/**
+ * Feuille de style unique du projet.
+ *
+ * Direction : univers réel d'une pharmacie plutôt que le cliché "app
+ * médicale bleu-vert" — précision clinique, un seul accent (clin d'œil
+ * à la croix verte des pharmacies). Palette nommée ci-dessous, deux
+ * polices (une d'affichage pour les titres, une de texte qui la
+ * complète), un seul élément signature : le "timbre" de statut
+ * d'ordonnance, qui imite le tampon qu'un pharmacien appose dessus —
+ * seul endroit qui utilise la police machine à écrire.
+ *
+ * Palette :
+ *   Encre    #1C2420 — texte principal, fond de la navigation
+ *   Pierre   #E9E7E0 — fond de page
+ *   Vert     #21894F — accent unique (croix de pharmacie)
+ *   Sauge    #4F6B58 — validé / succès (plus feutré que Vert)
+ *   Brique   #9B4030 — rejeté / erreur / critique
+ *   Ardoise  #454F4A — texte secondaire, bordures, libellés
+ */
+
+:root {
+    --encre: #1C2420;
+    --pierre: #E9E7E0;
+    --surface: #FFFFFF;
+    --vert: #21894F;
+    --vert-fonce: #145C34;
+    --sauge: #4F6B58;
+    --sauge-fonce: #3E5747;
+    --brique: #9B4030;
+    --ardoise: #454F4A;
+    --ardoise-clair: #8A9089;
+    --bordure: #DEDCD3;
+    --police-titres: 'Zilla Slab', Georgia, 'Times New Roman', serif;
+    --police-timbre: 'Special Elite', 'Courier New', monospace;
+    --police-texte: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--pierre);
+    color: var(--encre);
+    font-family: var(--police-texte);
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+/* Toute section hors navigation est contenue dans une colonne lisible,
+   sans avoir à ajouter un conteneur dans chaque vue. */
+body > :not(nav) {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+h1 {
+    font-family: var(--police-titres);
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: var(--encre);
+    margin: 1.75rem 0 1rem;
+}
+
+h2 {
+    font-family: var(--police-titres);
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--encre);
+    margin: 1.5rem 0 0.75rem;
+}
+
+p {
+    margin: 0.75rem 0;
+}
+
+a {
+    color: var(--vert);
+}
+
+a:hover,
+a:focus {
+    color: var(--vert-fonce);
+}
+
+/* ---------- Navigation ---------- */
+
+#navigation-principale {
+    background: var(--encre);
+    color: var(--pierre);
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    font-size: 0.95rem;
+}
+
+#navigation-principale a {
+    color: var(--pierre);
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+}
+
+#navigation-principale a:hover,
+#navigation-principale a:focus {
+    border-bottom-color: var(--vert);
+}
+
+#navigation-principale a:first-child {
+    font-family: var(--police-titres);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--vert);
+    margin-right: auto;
+}
+
+#utilisateur-connecte {
+    font-size: 0.82rem;
+    color: var(--ardoise-clair);
+}
+
+@media (max-width: 640px) {
+    #navigation-principale {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+
+    #navigation-principale a:first-child {
+        margin-right: 0;
+    }
+}
+
+/* ---------- Formulaires ---------- */
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-width: 420px;
+    margin-bottom: 1rem;
+}
+
+label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ardoise);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    font-family: var(--police-texte);
+    font-size: 1rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--ardoise-clair);
+    border-radius: 2px;
+    background: var(--surface);
+    color: var(--encre);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--vert);
+    outline-offset: 1px;
+    border-color: var(--vert);
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+button {
+    font-family: var(--police-texte);
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.6rem 1.1rem;
+    background: var(--encre);
+    color: var(--pierre);
+    border: 1px solid var(--encre);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button:hover,
+button:focus {
+    background: var(--vert);
+    border-color: var(--vert);
+    color: var(--pierre);
+}
+
+#message-js:empty {
+    display: none;
+}
+
+#message-js:not(:empty) {
+    color: var(--brique);
+    font-size: 0.85rem;
+    margin-top: -0.5rem;
+}
+
+#liste-erreurs {
+    list-style: none;
+    background: #F6EAE6;
+    border: 1px solid var(--brique);
+    color: #6B2A1D;
+    padding: 0.85rem 1.1rem;
+    margin: 1rem auto;
+    max-width: 480px;
+    font-size: 0.9rem;
+}
+
+#liste-erreurs li {
+    margin-bottom: 0.25rem;
+}
+
+#liste-erreurs li:last-child {
+    margin-bottom: 0;
+}
+
+#message-succes,
+#message-connecte {
+    background: #E9F0EA;
+    border: 1px solid var(--sauge);
+    color: #2E4536;
+    padding: 0.85rem 1.1rem;
+    margin: 1rem auto;
+    max-width: 480px;
+    font-size: 0.92rem;
+}
+
+/* Actions destructives ou de rejet : contour, pas de remplissage. */
+.formulaire-suppression button,
+.formulaire-annulation button,
+.formulaire-traitement button[value="rejetee"],
+.formulaire-statut-expedition button[value="annulee"] {
+    background: transparent;
+    color: var(--brique);
+    border-color: var(--brique);
+}
+
+.formulaire-suppression button:hover,
+.formulaire-annulation button:hover,
+.formulaire-traitement button[value="rejetee"]:hover,
+.formulaire-statut-expedition button[value="annulee"]:hover {
+    background: var(--brique);
+    color: var(--surface);
+}
+
+.formulaire-traitement button[value="validee"],
+.formulaire-statut-expedition button[value="livree"] {
+    background: var(--sauge);
+    border-color: var(--sauge);
+}
+
+.formulaire-traitement button[value="validee"]:hover,
+.formulaire-statut-expedition button[value="livree"]:hover {
+    background: var(--sauge-fonce);
+    border-color: var(--sauge-fonce);
+}
+
+.formulaire-renouvellement button {
+    background: var(--vert);
+    border-color: var(--vert);
+    color: var(--pierre);
+}
+
+.formulaire-renouvellement button:hover {
+    background: var(--vert-fonce);
+    border-color: var(--vert-fonce);
+}
+
+.formulaire-traitement,
+.formulaire-statut-expedition {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ---------- Recherche multicritère (médicaments) ---------- */
+
+.formulaire-recherche {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1rem;
+    max-width: none;
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    padding: 1rem 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.formulaire-recherche > div {
+    max-width: 220px;
+    margin-bottom: 0;
+}
+
+.formulaire-recherche-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding-bottom: 0.1rem;
+}
+
+/* ---------- Tableaux ---------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0 2rem;
+    font-size: 0.92rem;
+    background: var(--surface);
+}
+
+thead th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pierre);
+    background: var(--ardoise);
+    padding: 0.6rem 0.75rem;
+}
+
+tbody td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--bordure);
+    vertical-align: top;
+}
+
+tbody tr:hover {
+    background: #F4F3EE;
+}
+
+td a {
+    color: var(--vert);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+td form {
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+td button {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.82rem;
+}
+
+/* Stock critique : teinte de fond plutôt qu'une bande de couleur
+   latérale — pas de bande colorée à gauche des cartes/lignes. */
+tr.stock-critique {
+    background: #F6EAE6;
+}
+
+tr.stock-critique:hover {
+    background: #F1E0DA;
+}
+
+/* Tableau des médicaments dans le formulaire de soumission d'ordonnance */
+#tableau-medicaments-ordonnance td {
+    vertical-align: middle;
+}
+
+#tableau-medicaments-ordonnance input[type="text"] {
+    width: 100%;
+    max-width: 170px;
+    padding: 0.4rem 0.5rem;
+}
+
+#tableau-medicaments-ordonnance input[type="checkbox"] {
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--vert);
+}
+
+/* ---------- Fiches d'ordonnance ---------- */
+
+.carte-ordonnance {
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    max-width: 640px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.carte-ordonnance h2 {
+    margin-top: 0;
+}
+
+.carte-ordonnance p {
+    margin: 0.35rem 0;
+    font-size: 0.92rem;
+    color: var(--ardoise);
+}
+
+.carte-ordonnance ul {
+    margin: 0.75rem 0;
+    padding-left: 1.25rem;
+}
+
+.carte-ordonnance li {
+    margin-bottom: 0.3rem;
+    font-size: 0.92rem;
+    color: var(--encre);
+}
+
+.carte-ordonnance form {
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.badge-renouvellement {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--vert-fonce);
+    border: 1px dashed var(--vert);
+    padding: 0.2rem 0.6rem;
+}
+
+/* ---------- Élément signature : le timbre de statut ---------- */
+
+.ligne-statut {
+    margin: 0.75rem 0;
+}
+
+.timbre {
+    display: inline-block;
+    font-family: var(--police-timbre);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+    transform: rotate(-2deg);
+}
+
+.timbre-en_attente {
+    color: var(--ardoise);
+}
+
+.timbre-validee {
+    color: var(--sauge);
+}
+
+.timbre-rejetee {
+    color: var(--brique);
+}
+
+/* ---------- États inline (gravité, statut d'expédition) ---------- */
+
+.etat {
+    font-weight: 600;
+    font-size: 0.88rem;
+}
+
+.etat-gravite-faible,
+.etat-expedition-livree {
+    color: var(--sauge);
+}
+
+.etat-gravite-moderee,
+.etat-expedition-en_cours {
+    color: var(--vert-fonce);
+}
+
+.etat-gravite-elevee,
+.etat-expedition-annulee {
+    color: var(--brique);
+}
+
+/* ---------- Rangées de statistiques (accueil + rapport) ---------- */
+/* Même composant partagé par #tableau-de-bord (accueil) et
+   #rapport-par-statut (rapport des expéditions), pour qu'ils restent
+   visuellement identiques. */
+
+.rangee-stats {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+    padding: 0;
+}
+
+.rangee-stats li {
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    padding: 1.1rem 1.4rem;
+    min-width: 240px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.rangee-stats a {
+    display: block;
+    color: var(--encre);
+    text-decoration: none;
+}
+
+.rangee-stats a:hover {
+    color: var(--vert);
+}

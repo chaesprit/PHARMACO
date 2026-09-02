@@ -2,8 +2,9 @@
 
 /**
  * Controller de l'entité Utilisateur.
- * Gère l'inscription (côté FrontOffice, réservée au rôle Client) et,
- * à terme, la connexion et le CRUD complet.
+ * FrontOffice : inscription (réservée au rôle Client), connexion,
+ * déconnexion. Le CRUD BackOffice (gestion des comptes par le
+ * Responsable) sera ajouté avec le module correspondant.
  */
 class UtilisateurController extends Controller
 {
@@ -58,6 +59,67 @@ class UtilisateurController extends Controller
             'donnees' => $donnees,
             'succes' => $succes,
         ]);
+    }
+
+    public function connexion(): void
+    {
+        if (isset($_SESSION['user_id'])) {
+            $this->render('frontoffice/connexion', [
+                'erreurs' => [],
+                'email' => '',
+                'dejaConnecte' => true,
+            ]);
+            return;
+        }
+
+        $erreurs = [];
+        $email = '';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = trim($_POST['email'] ?? '');
+            $motDePasse = $_POST['mot_de_passe'] ?? '';
+
+            if ($email === '') {
+                $erreurs[] = "L'email est obligatoire.";
+            }
+
+            if ($motDePasse === '') {
+                $erreurs[] = 'Le mot de passe est obligatoire.';
+            }
+
+            if (empty($erreurs)) {
+                $utilisateur = $this->utilisateurModel->trouverParEmail($email);
+
+                if (!$utilisateur || !$this->utilisateurModel->verifierMotDePasse($motDePasse, $utilisateur['mot_de_passe'])) {
+                    $erreurs[] = 'Email ou mot de passe incorrect.';
+                } else {
+                    $_SESSION['user_id'] = $utilisateur['id_utilisateur'];
+                    $_SESSION['user_role'] = $utilisateur['role'];
+                    $_SESSION['user_nom'] = $utilisateur['prenom'] . ' ' . $utilisateur['nom'];
+
+                    $this->render('frontoffice/connexion', [
+                        'erreurs' => [],
+                        'email' => '',
+                        'dejaConnecte' => true,
+                    ]);
+                    return;
+                }
+            }
+        }
+
+        $this->render('frontoffice/connexion', [
+            'erreurs' => $erreurs,
+            'email' => $email,
+            'dejaConnecte' => false,
+        ]);
+    }
+
+    public function deconnexion(): void
+    {
+        $_SESSION = [];
+        session_destroy();
+
+        $this->redirect('index.php?controller=Utilisateur&action=connexion');
     }
 
     /**

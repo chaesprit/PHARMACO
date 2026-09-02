@@ -295,6 +295,27 @@ button:focus {
     font-size: 0.92rem;
 }
 
+/* Bandeau flash : message ponctuel affiché après un redirect
+   (créer / modifier / supprimer), sous la navigation. */
+.bandeau-flash {
+    padding: 0.8rem 1.1rem;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    border: 1px solid;
+}
+
+.bandeau-flash-succes {
+    background: #E9F0EA;
+    border-color: var(--sauge);
+    color: #2E4536;
+}
+
+.bandeau-flash-erreur {
+    background: #F6EAE6;
+    border-color: var(--brique);
+    color: #6B2A1D;
+}
+
 /* Actions destructives ou de rejet : contour, pas de remplissage. */
 .formulaire-suppression button,
 .formulaire-annulation button,

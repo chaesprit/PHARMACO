@@ -54,6 +54,7 @@ class InteractionController extends Controller
                     'id_pharmacien' => (int) $_SESSION['user_id'],
                 ]);
 
+                $this->flash('succes', 'Interaction médicamenteuse enregistrée.');
                 $this->redirect('index.php?controller=Interaction&action=liste');
             }
         }
@@ -72,6 +73,7 @@ class InteractionController extends Controller
         $id = (int) ($_GET['id'] ?? 0);
         $this->interactionModel->supprimer($id);
 
+        $this->flash('succes', 'Interaction supprimée.');
         $this->redirect('index.php?controller=Interaction&action=liste');
     }
 

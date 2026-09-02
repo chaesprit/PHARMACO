@@ -180,6 +180,7 @@ class UtilisateurController extends Controller
                     'telephone' => $donnees['telephone'] !== '' ? $donnees['telephone'] : null,
                 ]);
 
+                $this->flash('succes', 'Compte créé.');
                 $this->redirect('index.php?controller=Utilisateur&action=liste');
             }
         }
@@ -230,6 +231,7 @@ class UtilisateurController extends Controller
                     'telephone' => $donnees['telephone'] !== '' ? $donnees['telephone'] : null,
                 ]);
 
+                $this->flash('succes', 'Compte modifié.');
                 $this->redirect('index.php?controller=Utilisateur&action=liste');
             }
         }
@@ -254,6 +256,7 @@ class UtilisateurController extends Controller
         }
 
         $this->utilisateurModel->supprimer($id);
+        $this->flash('succes', 'Compte supprimé.');
         $this->redirect('index.php?controller=Utilisateur&action=liste');
     }
 

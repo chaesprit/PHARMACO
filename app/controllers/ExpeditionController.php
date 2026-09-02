@@ -50,6 +50,7 @@ class ExpeditionController extends Controller
                     'fournisseur' => $donnees['fournisseur'] !== '' ? $donnees['fournisseur'] : null,
                 ]);
 
+                $this->flash('succes', 'Expédition enregistrée.');
                 $this->redirect('index.php?controller=Expedition&action=liste');
             }
         }
@@ -76,6 +77,9 @@ class ExpeditionController extends Controller
 
         $this->expeditionModel->changerStatut($id, $statut);
 
+        $this->flash('succes', $statut === 'livree'
+            ? 'Expédition marquée livrée. Le stock a été mis à jour.'
+            : 'Expédition annulée.');
         $this->redirect('index.php?controller=Expedition&action=liste');
     }
 
@@ -86,6 +90,7 @@ class ExpeditionController extends Controller
         $id = (int) ($_GET['id'] ?? 0);
         $this->expeditionModel->supprimer($id);
 
+        $this->flash('succes', 'Expédition supprimée.');
         $this->redirect('index.php?controller=Expedition&action=liste');
     }
 

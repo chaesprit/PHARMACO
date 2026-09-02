@@ -42,6 +42,7 @@ class MedicamentController extends Controller
 
             if (empty($erreurs)) {
                 $this->medicamentModel->creer($donnees);
+                $this->flash('succes', 'Médicament ajouté.');
                 $this->redirect('index.php?controller=Medicament&action=liste');
             }
         }
@@ -82,6 +83,7 @@ class MedicamentController extends Controller
 
             if (empty($erreurs)) {
                 $this->medicamentModel->mettreAJour($id, $donnees);
+                $this->flash('succes', 'Médicament modifié.');
                 $this->redirect('index.php?controller=Medicament&action=liste');
             }
         }
@@ -100,6 +102,7 @@ class MedicamentController extends Controller
         $id = (int) ($_GET['id'] ?? 0);
         $this->medicamentModel->supprimer($id);
 
+        $this->flash('succes', 'Médicament supprimé.');
         $this->redirect('index.php?controller=Medicament&action=liste');
     }
 

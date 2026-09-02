@@ -41,3 +41,5 @@ $roleConnecte = $_SESSION['user_role'] ?? null;
         <a href="index.php?controller=Utilisateur&action=deconnexion">Se déconnecter</a>
     <?php endif; ?>
 </nav>
+
+<?php require VUES_DIR . 'partials/flash.php'; ?>

@@ -39,6 +39,7 @@ class OrdonnanceController extends Controller
                     $lignes
                 );
 
+                $this->flash('succes', 'Ordonnance soumise. Elle est en attente de validation.');
                 $this->redirect('index.php?controller=Ordonnance&action=mesOrdonnances');
             }
         }
@@ -87,6 +88,7 @@ class OrdonnanceController extends Controller
 
         $this->ordonnanceModel->supprimer($id);
 
+        $this->flash('succes', 'Ordonnance annulée.');
         $this->redirect('index.php?controller=Ordonnance&action=mesOrdonnances');
     }
 
@@ -111,6 +113,7 @@ class OrdonnanceController extends Controller
 
         $this->ordonnanceModel->creerRenouvellement($id, (int) $_SESSION['user_id']);
 
+        $this->flash('succes', 'Demande de renouvellement envoyée.');
         $this->redirect('index.php?controller=Ordonnance&action=mesOrdonnances');
     }
 
@@ -153,6 +156,7 @@ class OrdonnanceController extends Controller
 
         $this->ordonnanceModel->valider($id, (int) $_SESSION['user_id'], $statut);
 
+        $this->flash('succes', $statut === 'validee' ? 'Ordonnance validée.' : 'Ordonnance rejetée.');
         $this->redirect('index.php?controller=Ordonnance&action=liste');
     }
 
@@ -163,6 +167,7 @@ class OrdonnanceController extends Controller
         $id = (int) ($_GET['id'] ?? 0);
         $this->ordonnanceModel->supprimer($id);
 
+        $this->flash('succes', 'Ordonnance supprimée.');
         $this->redirect('index.php?controller=Ordonnance&action=liste');
     }
 

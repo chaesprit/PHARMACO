@@ -32,6 +32,16 @@ class Controller
     }
 
     /**
+     * Enregistre un message à afficher une seule fois sur la page qui
+     * suit (typiquement après un redirect). $type vaut 'succes' ou
+     * 'erreur'. L'affichage et la purge sont faits par partials/flash.php.
+     */
+    protected function flash(string $type, string $message): void
+    {
+        $_SESSION['flash'] = ['type' => $type, 'message' => $message];
+    }
+
+    /**
      * Garde d'accès BackOffice : impose une connexion, puis un rôle
      * parmi ceux autorisés. À appeler en première ligne de chaque
      * action réservée (ex: exigerRole(['responsable'])).

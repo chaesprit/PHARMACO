@@ -24,12 +24,29 @@
     --surface: #FFFFFF;
     --vert: #21894F;
     --vert-fonce: #145C34;
+    --vert-clair: #6FCF9C;
     --sauge: #4F6B58;
     --sauge-fonce: #3E5747;
     --brique: #9B4030;
     --ardoise: #454F4A;
     --ardoise-clair: #8A9089;
     --bordure: #DEDCD3;
+
+    /* Bleu du logo — couleur structurelle (navigation, boutons neutres,
+       titres). Le vert reste réservé aux actions « métier pharmacie ». */
+    --bleu: #1C6EA4;
+    --bleu-fonce: #14527A;
+    --bleu-nuit: #0F3B57;
+
+    /* Couleurs du pictogramme de la marque : valeurs pour fond clair.
+       La navigation les redéfinit pour son fond bleu. */
+    --logo-doc: var(--bleu);
+    --logo-doc-ligne: rgba(255, 255, 255, 0.65);
+    --logo-croix: var(--vert);
+    --logo-gelule: var(--vert);
+    --logo-gelule-clair: #8FD4B0;
+    --logo-pixel: var(--bleu);
+
     --police-titres: 'Zilla Slab', Georgia, 'Times New Roman', serif;
     --police-timbre: 'Special Elite', 'Courier New', monospace;
     --police-texte: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -90,14 +107,21 @@ a:focus {
 /* ---------- Navigation ---------- */
 
 #navigation-principale {
-    background: var(--encre);
+    background: var(--bleu-nuit);
     color: var(--pierre);
-    padding: 0.9rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1.1rem;
     font-size: 0.95rem;
+    /* le pictogramme de la marque s'éclaircit pour ce fond bleu */
+    --logo-doc: #FFFFFF;
+    --logo-doc-ligne: #9DB6C6;
+    --logo-croix: var(--vert-clair);
+    --logo-gelule: var(--vert-clair);
+    --logo-gelule-clair: #FFFFFF;
+    --logo-pixel: #FFFFFF;
 }
 
 #navigation-principale a {
@@ -105,19 +129,48 @@ a:focus {
     text-decoration: none;
     padding-bottom: 3px;
     border-bottom: 2px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 #navigation-principale a:hover,
 #navigation-principale a:focus {
-    border-bottom-color: var(--vert);
+    border-bottom-color: var(--vert-clair);
+    color: #FFFFFF;
 }
 
-#navigation-principale a:first-child {
+#lien-marque {
+    margin-right: auto;
+    border-bottom: 0 !important;
+}
+
+.marque {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.marque-picto {
+    width: 2.9rem;
+    height: 2.9rem;
+    flex-shrink: 0;
+}
+
+.picto-doc { fill: var(--logo-doc); }
+.picto-pli { fill: #000000; opacity: 0.16; }
+.picto-ligne { fill: var(--logo-doc-ligne); }
+.picto-croix { fill: var(--logo-croix); }
+.picto-gelule { fill: var(--logo-gelule); }
+.picto-gelule-clair { fill: var(--logo-gelule-clair); }
+.picto-gelule-trait { fill: #FFFFFF; opacity: 0.55; }
+.picto-pixel { fill: var(--logo-pixel); }
+.picto-pixel-faible { opacity: 0.5; }
+
+.marque-mot {
     font-family: var(--police-titres);
     font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--vert);
-    margin-right: auto;
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
 }
 
 #utilisateur-connecte {
@@ -132,7 +185,7 @@ a:focus {
         gap: 0.6rem;
     }
 
-    #navigation-principale a:first-child {
+    #lien-marque {
         margin-right: 0;
     }
 }
@@ -187,18 +240,19 @@ button {
     font-weight: 600;
     font-size: 0.92rem;
     padding: 0.6rem 1.1rem;
-    background: var(--encre);
-    color: var(--pierre);
-    border: 1px solid var(--encre);
+    background: var(--bleu);
+    color: #FFFFFF;
+    border: 1px solid var(--bleu);
     border-radius: 2px;
     cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 button:hover,
 button:focus {
-    background: var(--vert);
-    border-color: var(--vert);
-    color: var(--pierre);
+    background: var(--bleu-fonce);
+    border-color: var(--bleu-fonce);
+    color: #FFFFFF;
 }
 
 #message-js:empty {

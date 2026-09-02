@@ -11,6 +11,8 @@ $estConnecte = isset($_SESSION['user_id']);
 $roleConnecte = $_SESSION['user_role'] ?? null;
 ?>
 <nav id="navigation-principale">
+    <a href="index.php" id="lien-marque" aria-label="Accueil PHARMACO"><?php require VUES_DIR . 'partials/logo.php'; ?></a>
+
     <a href="index.php">Accueil</a>
 
     <?php if (!$estConnecte): ?>

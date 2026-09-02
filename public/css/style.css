@@ -690,3 +690,44 @@ tr.stock-critique:hover {
     font-size: 0.92rem;
     color: var(--ardoise);
 }
+
+/* ---------- Conseils santé ---------- */
+
+.carte-conseil {
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    border-top: 3px solid var(--vert);
+    max-width: 640px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.1rem;
+}
+
+.carte-conseil h2 {
+    margin-top: 0;
+    margin-bottom: 0.3rem;
+}
+
+.carte-conseil h2 a {
+    text-decoration: none;
+}
+
+.conseil-meta {
+    margin: 0.2rem 0 0.6rem;
+    font-size: 0.82rem;
+    color: var(--ardoise-clair);
+}
+
+.conseil-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0;
+}
+
+.conseil-contenu {
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    padding: 1.25rem 1.5rem;
+    line-height: 1.7;
+}

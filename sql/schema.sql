@@ -92,3 +92,16 @@ CREATE TABLE expedition (
     statut          ENUM('en_cours', 'livree', 'annulee') NOT NULL DEFAULT 'en_cours',
     FOREIGN KEY (id_medicament) REFERENCES medicament(id_medicament)
 ) ENGINE=InnoDB;
+
+-- Table métier justifiée : conseils santé publiés par le Pharmacien
+-- (rôle de conseil au client, sections 8 et 18 du cahier des charges) et
+-- consultés en lecture par le client et les visiteurs.
+CREATE TABLE conseil (
+    id_conseil       INT AUTO_INCREMENT PRIMARY KEY,
+    titre            VARCHAR(150) NOT NULL,
+    contenu          TEXT NOT NULL,
+    id_auteur        INT NOT NULL,
+    date_publication DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_maj         DATETIME NULL,
+    FOREIGN KEY (id_auteur) REFERENCES utilisateur(id_utilisateur)
+) ENGINE=InnoDB;

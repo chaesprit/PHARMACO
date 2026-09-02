@@ -577,3 +577,140 @@ tr.stock-critique:hover {
 .rangee-stats a:hover {
     color: var(--vert);
 }
+
+.stat-chiffre {
+    display: block;
+    font-family: var(--police-titres);
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.1;
+    color: var(--bleu);
+}
+
+.stat-libelle {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--ardoise);
+}
+
+.rangee-stats a:hover .stat-chiffre {
+    color: var(--bleu-fonce);
+}
+
+/* ---------- Page d'accueil : hero + cartes ---------- */
+
+.hero {
+    text-align: center;
+    padding: 2.5rem 0 1.5rem;
+    border-bottom: 1px solid var(--bordure);
+}
+
+.hero-marque .marque {
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.hero-marque .marque-picto {
+    width: 5.5rem;
+    height: 5.5rem;
+}
+
+.hero-marque .marque-mot {
+    color: var(--bleu);
+    font-size: 2.6rem;
+    letter-spacing: 0.03em;
+}
+
+.hero-accroche {
+    margin: 0.25rem 0 1.25rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ardoise);
+}
+
+.hero-texte {
+    max-width: 46rem;
+    margin: 0 auto 1.75rem;
+    color: var(--ardoise);
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.bouton {
+    display: inline-block;
+    font-family: var(--police-texte);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid var(--bleu);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.bouton-principal {
+    background: var(--bleu);
+    color: #FFFFFF;
+}
+
+.bouton-principal:hover,
+.bouton-principal:focus {
+    background: var(--bleu-fonce);
+    border-color: var(--bleu-fonce);
+    color: #FFFFFF;
+}
+
+.bouton-secondaire {
+    background: transparent;
+    color: var(--bleu);
+}
+
+.bouton-secondaire:hover,
+.bouton-secondaire:focus {
+    background: var(--bleu);
+    color: #FFFFFF;
+}
+
+.cartes-accueil {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.1rem;
+}
+
+.carte-accueil {
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    border-top: 3px solid var(--vert);
+    padding: 1.25rem 1.4rem;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.carte-accueil:hover {
+    box-shadow: 0 6px 18px rgba(15, 59, 87, 0.09);
+    transform: translateY(-2px);
+}
+
+.carte-accueil h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.carte-accueil h2 a {
+    text-decoration: none;
+}
+
+.carte-accueil p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--ardoise);
+}

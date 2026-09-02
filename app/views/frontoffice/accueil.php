@@ -15,7 +15,7 @@
     <?php if ($role === null): ?>
         <p>Bienvenue. Connectez-vous ou inscrivez-vous pour soumettre une ordonnance.</p>
     <?php elseif ($role === 'client'): ?>
-        <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_nom']) ?>. Depuis ce compte, vous pourrez soumettre une ordonnance et suivre son statut.</p>
+        <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_nom']) ?>. Depuis ce compte, vous pouvez soumettre une ordonnance et suivre son statut.</p>
     <?php else: ?>
         <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_nom']) ?>.</p>
     <?php endif; ?>

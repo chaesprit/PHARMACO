@@ -17,8 +17,12 @@ $roleConnecte = $_SESSION['user_role'] ?? null;
         <a href="index.php?controller=Utilisateur&action=connexion">Connexion</a>
         <a href="index.php?controller=Utilisateur&action=inscription">Inscription</a>
     <?php else: ?>
-        <?php if ($roleConnecte === 'pharmacien' || $roleConnecte === 'responsable'): ?>
+        <?php if ($roleConnecte === 'client'): ?>
+            <a href="index.php?controller=Ordonnance&action=soumettre">Soumettre une ordonnance</a>
+            <a href="index.php?controller=Ordonnance&action=mesOrdonnances">Mes ordonnances</a>
+        <?php elseif ($roleConnecte === 'pharmacien' || $roleConnecte === 'responsable'): ?>
             <a href="index.php?controller=Medicament&action=liste">Médicaments</a>
+            <a href="index.php?controller=Ordonnance&action=liste">Ordonnances</a>
         <?php endif; ?>
 
         <span id="utilisateur-connecte">Connecté : <?= htmlspecialchars($_SESSION['user_nom']) ?> (<?= htmlspecialchars($roleConnecte) ?>)</span>

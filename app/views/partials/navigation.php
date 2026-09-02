@@ -25,11 +25,13 @@ $roleConnecte = $_SESSION['user_role'] ?? null;
             <a href="index.php?controller=Medicament&action=liste">Médicaments</a>
             <a href="index.php?controller=Ordonnance&action=liste">Ordonnances</a>
             <a href="index.php?controller=Interaction&action=liste">Interactions médicamenteuses</a>
+            <a href="index.php?controller=Expedition&action=liste">Expéditions</a>
         <?php elseif ($roleConnecte === 'responsable'): ?>
             <a href="index.php?controller=Utilisateur&action=liste">Utilisateurs</a>
             <a href="index.php?controller=Medicament&action=liste">Médicaments</a>
             <a href="index.php?controller=Ordonnance&action=liste">Ordonnances</a>
             <a href="index.php?controller=Interaction&action=liste">Interactions médicamenteuses</a>
+            <a href="index.php?controller=Expedition&action=liste">Expéditions</a>
         <?php endif; ?>
 
         <span id="utilisateur-connecte">Connecté : <?= htmlspecialchars($_SESSION['user_nom']) ?> (<?= htmlspecialchars($roleConnecte) ?>)</span>

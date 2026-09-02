@@ -19,8 +19,8 @@
  */
 
 :root {
-    --encre: #1C2420;
-    --pierre: #E9E7E0;
+    --encre: #1B2A33;
+    --pierre: #EDF1F4;
     --surface: #FFFFFF;
     --vert: #21894F;
     --vert-fonce: #145C34;
@@ -28,15 +28,20 @@
     --sauge: #4F6B58;
     --sauge-fonce: #3E5747;
     --brique: #9B4030;
-    --ardoise: #454F4A;
-    --ardoise-clair: #8A9089;
-    --bordure: #DEDCD3;
+    --ardoise: #4A555C;
+    --ardoise-clair: #879299;
+    --bordure: #DDE3E8;
 
     /* Bleu du logo — couleur structurelle (navigation, boutons neutres,
        titres). Le vert reste réservé aux actions « métier pharmacie ». */
     --bleu: #1C6EA4;
     --bleu-fonce: #14527A;
     --bleu-nuit: #0F3B57;
+
+    --rayon: 8px;
+    --rayon-sm: 5px;
+    --ombre: 0 1px 3px rgba(15, 59, 87, 0.07), 0 6px 20px rgba(15, 59, 87, 0.05);
+    --ombre-survol: 0 8px 24px rgba(15, 59, 87, 0.12);
 
     --police-titres: 'Zilla Slab', Georgia, 'Times New Roman', serif;
     --police-timbre: 'Special Elite', 'Courier New', monospace;
@@ -54,6 +59,7 @@ body {
     font-family: var(--police-texte);
     font-size: 16px;
     line-height: 1.55;
+    padding-bottom: 3rem;
 }
 
 /* Toute section hors navigation est contenue dans une colonne lisible,
@@ -69,20 +75,20 @@ body > :not(nav) {
 h1 {
     font-family: var(--police-titres);
     font-weight: 700;
-    font-size: 1.9rem;
+    font-size: 2rem;
     color: var(--encre);
-    margin: 1.75rem 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--bleu);
+    margin: 1.9rem 0 1.1rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 3px solid var(--bleu);
     display: inline-block;
 }
 
 h2 {
     font-family: var(--police-titres);
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: var(--encre);
-    margin: 1.5rem 0 0.75rem;
+    margin: 1.6rem 0 0.75rem;
 }
 
 p {
@@ -163,6 +169,19 @@ a:focus {
 
 /* ---------- Formulaires ---------- */
 
+/* Les formulaires « de page » (création / édition / connexion…) sont
+   présentés dans un panneau blanc. Les mini-formulaires en ligne des
+   tableaux (suppression, traitement…) gardent le style par défaut. */
+form[id^="formulaire-"]:not(.formulaire-recherche) {
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1.6rem 1.8rem 1.4rem;
+    max-width: 560px;
+    margin: 1.25rem 0 2rem;
+}
+
 form > div {
     display: flex;
     flex-direction: column;
@@ -185,9 +204,9 @@ select,
 textarea {
     font-family: var(--police-texte);
     font-size: 1rem;
-    padding: 0.55rem 0.7rem;
+    padding: 0.6rem 0.75rem;
     border: 1px solid var(--ardoise-clair);
-    border-radius: 2px;
+    border-radius: var(--rayon-sm);
     background: var(--surface);
     color: var(--encre);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -211,13 +230,14 @@ button {
     font-family: var(--police-texte);
     font-weight: 600;
     font-size: 0.92rem;
-    padding: 0.6rem 1.1rem;
+    padding: 0.62rem 1.25rem;
     background: var(--bleu);
     color: #FFFFFF;
     border: 1px solid var(--bleu);
-    border-radius: 2px;
+    border-radius: var(--rayon-sm);
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease;
+    box-shadow: 0 1px 2px rgba(15, 59, 87, 0.15);
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 button:hover,
@@ -225,6 +245,10 @@ button:focus {
     background: var(--bleu-fonce);
     border-color: var(--bleu-fonce);
     color: #FFFFFF;
+}
+
+button:active {
+    transform: translateY(1px);
 }
 
 #message-js:empty {
@@ -239,12 +263,13 @@ button:focus {
 
 #liste-erreurs {
     list-style: none;
-    background: #F6EAE6;
+    background: #F7ECE8;
     border: 1px solid var(--brique);
+    border-radius: var(--rayon-sm);
     color: #6B2A1D;
     padding: 0.85rem 1.1rem;
-    margin: 1rem auto;
-    max-width: 480px;
+    margin: 1rem 0;
+    max-width: 560px;
     font-size: 0.9rem;
 }
 
@@ -258,22 +283,25 @@ button:focus {
 
 #message-succes,
 #message-connecte {
-    background: #E9F0EA;
+    background: #E7F1EA;
     border: 1px solid var(--sauge);
+    border-radius: var(--rayon-sm);
     color: #2E4536;
     padding: 0.85rem 1.1rem;
-    margin: 1rem auto;
-    max-width: 480px;
+    margin: 1rem 0;
+    max-width: 560px;
     font-size: 0.92rem;
 }
 
 /* Bandeau flash : message ponctuel affiché après un redirect
    (créer / modifier / supprimer), sous la navigation. */
 .bandeau-flash {
-    padding: 0.8rem 1.1rem;
-    margin: 1rem 0;
+    padding: 0.85rem 1.15rem;
+    margin: 1.1rem 0;
     font-size: 0.92rem;
+    font-weight: 600;
     border: 1px solid;
+    border-radius: var(--rayon-sm);
 }
 
 .bandeau-flash-succes {
@@ -345,8 +373,10 @@ button:focus {
     max-width: none;
     background: var(--surface);
     border: 1px solid var(--bordure);
-    padding: 1rem 1.25rem;
-    margin-top: 0.5rem;
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1.1rem 1.35rem;
+    margin: 0.5rem 0 1.5rem;
 }
 
 .formulaire-recherche > div {
@@ -365,27 +395,36 @@ button:focus {
 
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin: 1.25rem 0 2rem;
     font-size: 0.92rem;
     background: var(--surface);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+    overflow: hidden;
+    box-shadow: var(--ombre);
 }
 
 thead th {
     text-align: left;
-    font-weight: 600;
-    font-size: 0.75rem;
+    font-weight: 700;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--pierre);
-    background: var(--ardoise);
-    padding: 0.6rem 0.75rem;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+    background: var(--bleu-nuit);
+    padding: 0.7rem 0.85rem;
 }
 
 tbody td {
-    padding: 0.6rem 0.75rem;
+    padding: 0.65rem 0.85rem;
     border-bottom: 1px solid var(--bordure);
     vertical-align: top;
+}
+
+tbody tr:last-child td {
+    border-bottom: 0;
 }
 
 tbody tr {
@@ -426,7 +465,13 @@ tr.stock-critique:hover {
     background: #F1E0DA;
 }
 
-/* Tableau des médicaments dans le formulaire de soumission d'ordonnance */
+/* Tableau des médicaments dans le formulaire de soumission d'ordonnance :
+   déjà à l'intérieur du panneau du formulaire, on retire son ombre. */
+#tableau-medicaments-ordonnance {
+    box-shadow: none;
+    margin-top: 0.5rem;
+}
+
 #tableau-medicaments-ordonnance td {
     vertical-align: middle;
 }
@@ -448,6 +493,9 @@ tr.stock-critique:hover {
 .carte-ordonnance {
     background: var(--surface);
     border: 1px solid var(--bordure);
+    border-top: 3px solid var(--bleu);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
     max-width: 640px;
     padding: 1.25rem 1.5rem;
     margin-bottom: 1.25rem;
@@ -503,8 +551,12 @@ tr.stock-critique:hover {
     text-transform: uppercase;
     padding: 0.35rem 0.9rem;
     border: 2px solid currentColor;
-    border-radius: 3px;
+    border-radius: var(--rayon-sm);
     transform: rotate(-2deg);
+}
+
+.badge-renouvellement {
+    border-radius: 999px;
 }
 
 .timbre-en_attente {
@@ -560,7 +612,9 @@ tr.stock-critique:hover {
     background: var(--surface);
     border: 1px solid var(--bordure);
     border-top: 3px solid var(--bleu);
-    padding: 1.1rem 1.4rem;
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1.2rem 1.5rem;
     min-width: 240px;
     text-align: center;
     font-size: 0.95rem;
@@ -568,8 +622,8 @@ tr.stock-critique:hover {
 }
 
 .rangee-stats li:hover {
-    box-shadow: 0 6px 18px rgba(15, 59, 87, 0.09);
-    transform: translateY(-2px);
+    box-shadow: var(--ombre-survol);
+    transform: translateY(-3px);
 }
 
 .rangee-stats a {
@@ -604,9 +658,11 @@ tr.stock-critique:hover {
     text-align: center;
     background: var(--surface);
     border: 1px solid var(--bordure);
-    border-top: 3px solid var(--bleu);
-    padding: 2.5rem 1.5rem 2rem;
-    margin-top: 1.75rem;
+    border-top: 4px solid var(--bleu);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 2.75rem 1.5rem 2.25rem;
+    margin-top: 2rem;
 }
 
 .hero-marque {
@@ -637,11 +693,19 @@ tr.stock-critique:hover {
     font-family: var(--police-texte);
     font-weight: 600;
     font-size: 0.95rem;
-    padding: 0.65rem 1.4rem;
-    border-radius: 2px;
+    padding: 0.7rem 1.6rem;
+    border-radius: var(--rayon-sm);
     text-decoration: none;
     border: 1px solid var(--bleu);
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.bouton-principal {
+    box-shadow: 0 1px 2px rgba(15, 59, 87, 0.15);
+}
+
+.bouton:active {
+    transform: translateY(1px);
 }
 
 .bouton-principal {
@@ -680,13 +744,15 @@ tr.stock-critique:hover {
     background: var(--surface);
     border: 1px solid var(--bordure);
     border-top: 3px solid var(--vert);
-    padding: 1.25rem 1.4rem;
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1.4rem 1.5rem;
     transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .carte-accueil:hover {
-    box-shadow: 0 6px 18px rgba(15, 59, 87, 0.09);
-    transform: translateY(-2px);
+    box-shadow: var(--ombre-survol);
+    transform: translateY(-3px);
 }
 
 .carte-accueil h2 {
@@ -710,14 +776,17 @@ tr.stock-critique:hover {
     background: var(--surface);
     border: 1px solid var(--bordure);
     border-top: 3px solid var(--vert);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
     max-width: 640px;
-    padding: 1.1rem 1.4rem;
+    padding: 1.2rem 1.5rem;
     margin-bottom: 1.1rem;
-    transition: box-shadow 0.15s ease;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .carte-conseil:hover {
-    box-shadow: 0 6px 18px rgba(15, 59, 87, 0.08);
+    box-shadow: var(--ombre-survol);
+    transform: translateY(-2px);
 }
 
 .carte-conseil h2 {
@@ -746,6 +815,8 @@ tr.stock-critique:hover {
     max-width: 640px;
     background: var(--surface);
     border: 1px solid var(--bordure);
-    padding: 1.25rem 1.5rem;
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1.5rem 1.75rem;
     line-height: 1.7;
 }

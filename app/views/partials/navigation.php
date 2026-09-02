@@ -15,7 +15,7 @@ $roleConnecte = $_SESSION['user_role'] ?? null;
     <a href="index.php?controller=Conseil&action=liste">Conseils santé</a>
 
     <?php if (!$estConnecte): ?>
-        <a href="index.php?controller=Utilisateur&action=connexion">Connexion</a>
+        <a href="index.php?controller=Utilisateur&action=connexion" class="nav-droite-debut">Connexion</a>
         <a href="index.php?controller=Utilisateur&action=inscription">Inscription</a>
     <?php else: ?>
         <?php if ($roleConnecte === 'client'): ?>
@@ -36,7 +36,7 @@ $roleConnecte = $_SESSION['user_role'] ?? null;
             <a href="index.php?controller=Expedition&action=rapport">Rapport</a>
         <?php endif; ?>
 
-        <span id="utilisateur-connecte">Connecté : <?= htmlspecialchars($_SESSION['user_nom']) ?> (<?= htmlspecialchars($roleConnecte) ?>)</span>
+        <span id="utilisateur-connecte" class="nav-droite-debut">Connecté : <?= htmlspecialchars($_SESSION['user_nom']) ?> (<?= htmlspecialchars($roleConnecte) ?>)</span>
         <a href="index.php?controller=Utilisateur&action=deconnexion">Se déconnecter</a>
     <?php endif; ?>
 </nav>

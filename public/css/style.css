@@ -38,15 +38,6 @@
     --bleu-fonce: #14527A;
     --bleu-nuit: #0F3B57;
 
-    /* Couleurs du pictogramme de la marque : valeurs pour fond clair.
-       La navigation les redéfinit pour son fond bleu. */
-    --logo-doc: var(--bleu);
-    --logo-doc-ligne: rgba(255, 255, 255, 0.65);
-    --logo-croix: var(--vert);
-    --logo-gelule: var(--vert);
-    --logo-gelule-clair: #8FD4B0;
-    --logo-pixel: var(--bleu);
-
     --police-titres: 'Zilla Slab', Georgia, 'Times New Roman', serif;
     --police-timbre: 'Special Elite', 'Courier New', monospace;
     --police-texte: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -81,6 +72,9 @@ h1 {
     font-size: 1.9rem;
     color: var(--encre);
     margin: 1.75rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--vert);
+    display: inline-block;
 }
 
 h2 {
@@ -107,25 +101,20 @@ a:focus {
 /* ---------- Navigation ---------- */
 
 #navigation-principale {
-    background: var(--bleu-nuit);
-    color: var(--pierre);
-    padding: 0.75rem 1.5rem;
+    background: #FFFFFF;
+    color: var(--encre);
+    padding: 0.55rem 1.5rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.1rem;
+    gap: 1.4rem;
     font-size: 0.95rem;
-    /* le pictogramme de la marque s'éclaircit pour ce fond bleu */
-    --logo-doc: #FFFFFF;
-    --logo-doc-ligne: #9DB6C6;
-    --logo-croix: var(--vert-clair);
-    --logo-gelule: var(--vert-clair);
-    --logo-gelule-clair: #FFFFFF;
-    --logo-pixel: #FFFFFF;
+    border-bottom: 3px solid var(--vert);
+    box-shadow: 0 2px 10px rgba(15, 59, 87, 0.07);
 }
 
 #navigation-principale a {
-    color: var(--pierre);
+    color: var(--ardoise);
     text-decoration: none;
     padding-bottom: 3px;
     border-bottom: 2px solid transparent;
@@ -134,43 +123,20 @@ a:focus {
 
 #navigation-principale a:hover,
 #navigation-principale a:focus {
-    border-bottom-color: var(--vert-clair);
-    color: #FFFFFF;
+    border-bottom-color: var(--bleu);
+    color: var(--bleu);
 }
 
 #lien-marque {
     margin-right: auto;
     border-bottom: 0 !important;
-}
-
-.marque {
     display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
 }
 
-.marque-picto {
-    width: 2.9rem;
-    height: 2.9rem;
-    flex-shrink: 0;
-}
-
-.picto-doc { fill: var(--logo-doc); }
-.picto-pli { fill: #000000; opacity: 0.16; }
-.picto-ligne { fill: var(--logo-doc-ligne); }
-.picto-croix { fill: var(--logo-croix); }
-.picto-gelule { fill: var(--logo-gelule); }
-.picto-gelule-clair { fill: var(--logo-gelule-clair); }
-.picto-gelule-trait { fill: #FFFFFF; opacity: 0.55; }
-.picto-pixel { fill: var(--logo-pixel); }
-.picto-pixel-faible { opacity: 0.5; }
-
-.marque-mot {
-    font-family: var(--police-titres);
-    font-weight: 700;
-    font-size: 1.3rem;
-    letter-spacing: 0.02em;
-    color: #FFFFFF;
+.logo-img {
+    display: block;
+    height: 3.2rem;
+    width: auto;
 }
 
 #utilisateur-connecte {
@@ -623,32 +589,21 @@ tr.stock-critique:hover {
 
 .hero {
     text-align: center;
-    padding: 2.5rem 0 1.5rem;
-    border-bottom: 1px solid var(--bordure);
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    border-top: 3px solid var(--vert);
+    padding: 2.75rem 1.5rem 2.25rem;
+    margin-top: 1.75rem;
 }
 
-.hero-marque .marque {
-    flex-direction: column;
-    gap: 0.75rem;
+.hero-marque {
+    margin-bottom: 0.5rem;
 }
 
-.hero-marque .marque-picto {
-    width: 5.5rem;
-    height: 5.5rem;
-}
-
-.hero-marque .marque-mot {
-    color: var(--bleu);
-    font-size: 2.6rem;
-    letter-spacing: 0.03em;
-}
-
-.hero-accroche {
-    margin: 0.25rem 0 1.25rem;
-    font-size: 1.05rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ardoise);
+.hero-marque .logo-img {
+    height: auto;
+    width: min(22rem, 78%);
+    margin: 0 auto;
 }
 
 .hero-texte {

@@ -14,7 +14,6 @@
 
         <section class="hero">
             <div class="hero-marque"><?php require VUES_DIR . 'partials/logo.php'; ?></div>
-            <p class="hero-accroche">Plateforme de gestion pharmaceutique</p>
             <p class="hero-texte">
                 Gérez les médicaments, les ordonnances, les interactions et les
                 expéditions d'une pharmacie, du dépôt d'une ordonnance par le

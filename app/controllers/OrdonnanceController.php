@@ -3,7 +3,8 @@
 /**
  * Controller de l'entité Ordonnance.
  * FrontOffice (rôle Client) : soumission, consultation de ses propres
- * ordonnances, annulation tant qu'elles sont en attente.
+ * ordonnances, annulation tant qu'elles sont en attente, renouvellement
+ * d'une ordonnance déjà validée.
  * BackOffice (rôles Pharmacien/Responsable) : consultation de toutes les
  * ordonnances, validation/rejet, suppression.
  */
@@ -85,6 +86,30 @@ class OrdonnanceController extends Controller
         }
 
         $this->ordonnanceModel->supprimer($id);
+
+        $this->redirect('index.php?controller=Ordonnance&action=mesOrdonnances');
+    }
+
+    public function renouveler(): void
+    {
+        $this->exigerRole(['client']);
+
+        $id = (int) ($_GET['id'] ?? 0);
+        $ordonnance = $this->ordonnanceModel->trouverParId($id);
+
+        if (!$ordonnance || (int) $ordonnance['id_client'] !== (int) $_SESSION['user_id']) {
+            http_response_code(404);
+            echo 'Ordonnance introuvable.';
+            return;
+        }
+
+        if ($ordonnance['statut'] !== 'validee') {
+            http_response_code(400);
+            echo 'Seule une ordonnance déjà validée peut être renouvelée.';
+            return;
+        }
+
+        $this->ordonnanceModel->creerRenouvellement($id, (int) $_SESSION['user_id']);
 
         $this->redirect('index.php?controller=Ordonnance&action=mesOrdonnances');
     }

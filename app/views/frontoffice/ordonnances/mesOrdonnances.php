@@ -18,6 +18,10 @@
             <article class="carte-ordonnance">
                 <h2>Ordonnance #<?= (int) $ordonnance['id_ordonnance'] ?></h2>
 
+                <?php if ($ordonnance['est_renouvellement']): ?>
+                    <p class="badge-renouvellement">Renouvellement de l'ordonnance #<?= (int) $ordonnance['id_ordonnance_originale'] ?></p>
+                <?php endif; ?>
+
                 <p>Soumise le <?= htmlspecialchars($ordonnance['date_soumission']) ?></p>
                 <p class="ligne-statut">
                     <span class="timbre timbre-<?= htmlspecialchars($ordonnance['statut']) ?>"><?= htmlspecialchars(str_replace('_', ' ', $ordonnance['statut'])) ?></span>
@@ -46,6 +50,10 @@
                 <?php if ($ordonnance['statut'] === 'en_attente'): ?>
                     <form method="post" action="index.php?controller=Ordonnance&action=annuler&id=<?= (int) $ordonnance['id_ordonnance'] ?>" class="formulaire-annulation">
                         <button type="submit">Annuler cette ordonnance</button>
+                    </form>
+                <?php elseif ($ordonnance['statut'] === 'validee'): ?>
+                    <form method="post" action="index.php?controller=Ordonnance&action=renouveler&id=<?= (int) $ordonnance['id_ordonnance'] ?>" class="formulaire-renouvellement">
+                        <button type="submit">Renouveler cette ordonnance</button>
                     </form>
                 <?php endif; ?>
             </article>

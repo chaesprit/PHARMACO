@@ -4,6 +4,8 @@
  * Model de l'entité Ordonnance.
  * Une ordonnance regroupe un ou plusieurs médicaments (table de jointure
  * ordonnance_medicament) et suit un statut : en_attente -> validee/rejetee.
+ * Un renouvellement est une nouvelle ordonnance qui référence l'originale
+ * via id_ordonnance_originale et réutilise le même cycle de statut.
  */
 class Ordonnance extends Model
 {
@@ -115,5 +117,52 @@ class Ordonnance extends Model
         $stmt->execute(['statut' => $statut]);
 
         return (int) $stmt->fetchColumn();
+    }
+
+    /**
+     * Renouvellement : nouvelle ordonnance en_attente qui reprend les
+     * médicaments d'une ordonnance déjà validée, en la référençant via
+     * id_ordonnance_originale (voir sql/schema.sql).
+     */
+    public function creerRenouvellement(int $idOrdonnanceOriginale, int $idClient): int
+    {
+        $medicaments = $this->medicamentsDeOrdonnance($idOrdonnanceOriginale);
+
+        $this->db->beginTransaction();
+
+        try {
+            $stmt = $this->db->prepare(
+                'INSERT INTO ordonnance (id_client, commentaire, est_renouvellement, id_ordonnance_originale)
+                 VALUES (:id_client, :commentaire, TRUE, :id_originale)'
+            );
+            $stmt->execute([
+                'id_client' => $idClient,
+                'commentaire' => 'Renouvellement de l\'ordonnance #' . $idOrdonnanceOriginale,
+                'id_originale' => $idOrdonnanceOriginale,
+            ]);
+
+            $idNouvelleOrdonnance = (int) $this->db->lastInsertId();
+
+            $stmtLigne = $this->db->prepare(
+                'INSERT INTO ordonnance_medicament (id_ordonnance, id_medicament, quantite_prescrite, posologie)
+                 VALUES (:id_ordonnance, :id_medicament, :quantite, :posologie)'
+            );
+
+            foreach ($medicaments as $ligne) {
+                $stmtLigne->execute([
+                    'id_ordonnance' => $idNouvelleOrdonnance,
+                    'id_medicament' => $ligne['id_medicament'],
+                    'quantite' => $ligne['quantite_prescrite'],
+                    'posologie' => $ligne['posologie'],
+                ]);
+            }
+
+            $this->db->commit();
+
+            return $idNouvelleOrdonnance;
+        } catch (Throwable $exception) {
+            $this->db->rollBack();
+            throw $exception;
+        }
     }
 }

@@ -16,6 +16,10 @@
             <article class="carte-ordonnance">
                 <h2>Ordonnance #<?= (int) $ordonnance['id_ordonnance'] ?></h2>
 
+                <?php if ($ordonnance['est_renouvellement']): ?>
+                    <p class="badge-renouvellement">Renouvellement de l'ordonnance #<?= (int) $ordonnance['id_ordonnance_originale'] ?></p>
+                <?php endif; ?>
+
                 <p>
                     Client : <?= htmlspecialchars($ordonnance['client_prenom'] . ' ' . $ordonnance['client_nom']) ?>
                     — soumise le <?= htmlspecialchars($ordonnance['date_soumission']) ?>

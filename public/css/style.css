@@ -131,12 +131,12 @@ a:focus {
 #lien-marque {
     border-bottom: 0 !important;
     display: inline-flex;
-    margin-right: 0.35rem;
+    margin-right: 0.25rem;
 }
 
 .logo-img {
     display: block;
-    height: 2rem;
+    height: 1.7rem;
     width: auto;
 }
 
@@ -615,7 +615,7 @@ tr.stock-critique:hover {
 
 .hero-marque .logo-img {
     height: auto;
-    width: min(15rem, 60%);
+    width: min(13rem, 55%);
     margin: 0 auto;
 }
 

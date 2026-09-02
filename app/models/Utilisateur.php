@@ -51,6 +51,14 @@ class Utilisateur extends Model
         return $this->trouverParEmail($email) !== null;
     }
 
+    public function emailExistePourAutre(string $email, int $idExclu): bool
+    {
+        $stmt = $this->db->prepare('SELECT COUNT(*) FROM utilisateur WHERE email = :email AND id_utilisateur != :id');
+        $stmt->execute(['email' => $email, 'id' => $idExclu]);
+
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
     public function tousLesUtilisateurs(): array
     {
         return $this->db->query('SELECT * FROM utilisateur ORDER BY date_creation DESC')->fetchAll();

@@ -32,6 +32,7 @@ $roleConnecte = $_SESSION['user_role'] ?? null;
             <a href="index.php?controller=Ordonnance&action=liste">Ordonnances</a>
             <a href="index.php?controller=Interaction&action=liste">Interactions médicamenteuses</a>
             <a href="index.php?controller=Expedition&action=liste">Expéditions</a>
+            <a href="index.php?controller=Expedition&action=rapport">Rapport</a>
         <?php endif; ?>
 
         <span id="utilisateur-connecte">Connecté : <?= htmlspecialchars($_SESSION['user_nom']) ?> (<?= htmlspecialchars($roleConnecte) ?>)</span>

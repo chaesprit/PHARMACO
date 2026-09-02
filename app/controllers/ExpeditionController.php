@@ -3,7 +3,7 @@
 /**
  * Controller de la table métier `expedition`.
  * BackOffice (rôles Pharmacien/Responsable) : enregistrement, suivi et
- * réception des expéditions.
+ * réception des expéditions. Le rapport agrégé est réservé au Responsable.
  */
 class ExpeditionController extends Controller
 {
@@ -87,6 +87,16 @@ class ExpeditionController extends Controller
         $this->expeditionModel->supprimer($id);
 
         $this->redirect('index.php?controller=Expedition&action=liste');
+    }
+
+    public function rapport(): void
+    {
+        $this->exigerRole(['responsable']);
+
+        $this->render('backoffice/expeditions/rapport', [
+            'parStatut' => $this->expeditionModel->rapportParStatut(),
+            'parMedicament' => $this->expeditionModel->rapportParMedicament(),
+        ]);
     }
 
     private function validerExpedition(array $donnees): array

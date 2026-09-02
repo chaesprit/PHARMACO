@@ -9,7 +9,12 @@
     <?php require VUES_DIR . 'partials/navigation.php'; ?>
     <h1>Gestion des expéditions</h1>
 
-    <p><a href="index.php?controller=Expedition&action=creer">Enregistrer une expédition</a></p>
+    <p>
+        <a href="index.php?controller=Expedition&action=creer">Enregistrer une expédition</a>
+        <?php if (($_SESSION['user_role'] ?? null) === 'responsable'): ?>
+            — <a href="index.php?controller=Expedition&action=rapport">Voir le rapport</a>
+        <?php endif; ?>
+    </p>
 
     <?php if (empty($expeditions)): ?>
         <p>Aucune expédition enregistrée.</p>

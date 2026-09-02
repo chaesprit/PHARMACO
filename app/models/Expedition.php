@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Model de la table métier `expedition` (section 20 du cahier des charges).
+ * Model de la table métier `expedition` (section 20 du cahier des
+ * charges — rapport d'expéditions consulté par le Responsable Pharmacie).
  * Une expédition livrée incrémente automatiquement le stock du médicament
  * concerné ; c'est la seule voie de réapprovisionnement du stock.
  */
@@ -94,4 +95,26 @@ class Expedition extends Model
         return $stmt->execute(['id' => $id]);
     }
 
+    public function rapportParStatut(): array
+    {
+        $resultat = ['en_cours' => 0, 'livree' => 0, 'annulee' => 0];
+
+        foreach ($this->db->query('SELECT statut, COUNT(*) AS total FROM expedition GROUP BY statut')->fetchAll() as $ligne) {
+            $resultat[$ligne['statut']] = (int) $ligne['total'];
+        }
+
+        return $resultat;
+    }
+
+    public function rapportParMedicament(): array
+    {
+        return $this->db->query(
+            "SELECT m.nom, SUM(e.quantite) AS quantite_totale, COUNT(*) AS nombre_expeditions
+             FROM expedition e
+             JOIN medicament m ON m.id_medicament = e.id_medicament
+             WHERE e.statut = 'livree'
+             GROUP BY m.id_medicament, m.nom
+             ORDER BY quantite_totale DESC"
+        )->fetchAll();
+    }
 }
